@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup.edu";
+option java_outer_classname = "Desafio_pix";
+option objc_class_prefix = "HLW";
+
+package br.com.zup.edu;
+
+service CriaChavePixService {
+  rpc registra (RegistraChavePixRequest) returns (RegistraChavePixResponse);
+}
+
+service RemoveChavePixService{
+  rpc remove (RemoveChavePixRequest) returns (RemoveChavePixResponse);
+}
+
+
+enum TipoChave{
+  CPF = 0;
+  TELEFONE_CELULAR = 1;
+  EMAIL = 2;
+  CHAVE_ALEATORIA = 3;
+  UNKNOW_TIPO_CHAVE = 4;
+}
+
+enum TipoConta{
+  CONTA_CORRENTE = 0;
+  CONTA_POUPANCA = 1;
+}
+
+message RegistraChavePixRequest{
+  string clienteId = 1;
+  string nome = 2;
+  string documento = 3;
+  TipoConta tipoConta = 4;
+  TipoChave tipoChave = 5;
+  string chave = 6;
+
+
+}
+
+message RegistraChavePixResponse{
+  string cliente_id = 1;
+  string pixId = 2;
+
+}
+
+message RemoveChavePixRequest{
+  string pixId = 1;
+  string clientId=2;
+
+}
+
+message RemoveChavePixResponse{
+  string pixId = 1;
+  string clientId=2;
+
+}
