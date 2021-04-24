@@ -2,18 +2,20 @@ package br.com.zup.edu.clientes.dtos.bcb
 
 import br.com.zup.edu.TipoChave
 import br.com.zup.edu.TipoConta
+import java.time.LocalDateTime
 
-class CriaPixKeyRequest(
+class DetalhesPixResponse(
     val keyType: TipoChave,
     val key: String,
-    val bankAcount: BankAccount,
-    val owner: OwnerRequest
+    val bankAccount: BankAccountResponse,
+    val owner : OwnerResponse,
 ) {
 
+    val createAt = LocalDateTime.now()
 
 
 
-    data class BankAccount(
+    data class BankAccountResponse(
         val participant : String,
         val branch: String,
         val accountNumber: String,
@@ -35,7 +37,7 @@ class CriaPixKeyRequest(
     }
 
 
-    data class OwnerRequest(
+    data class OwnerResponse(
         val type:EnumType,
         val name :String,
         val taxIdNumber : String
