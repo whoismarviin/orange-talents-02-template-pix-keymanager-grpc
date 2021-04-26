@@ -27,7 +27,10 @@ class NovaChavePixService(
 
         //3. Grava dentro do banco de dados
         val chave = novaChave.toModel(conta)
-        repository.save(chave)
+
+
+        val clienteNoItau =
+            itauCliente.registraCliente(chave.clienteId.toString(), tipo = chave.tipoChave.toString())!!.body()
 
 
         //4. Coloca dentro do bc
@@ -36,19 +39,21 @@ class NovaChavePixService(
                 keyType = chave.tipoChave,
                 key = chave.chave,
                 bankAcount = CriaPixKeyRequest.BankAccount(
-                    participant = chave.conta.nome,
-                    branch = chave.conta.agencia,
+                    participant = clienteNoItau.nome,
+                    branch = clienteNoItau.agencia,
                     accountNumber = chave.conta.numero,
-                    accountType = CriaPixKeyRequest.AccountType.CAAC,
+                    accountType = CriaPixKeyRequest.AccountType.by(chave.tipoConta),
                 ),
                 owner = CriaPixKeyRequest.OwnerRequest(
                     type = CriaPixKeyRequest.OwnerRequest.EnumType.LEGAL_PERSON,
-                    name = chave.conta.nome,
-                    taxIdNumber = chave.id.toString()
+                    name = clienteNoItau.nome,
+                    taxIdNumber = novaChave.chave.random().toString()
                 )
 
             )
         )
+
+        repository.save(chave)
 
 
 

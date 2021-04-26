@@ -11,12 +11,12 @@ class ClienteResponse(
 
     fun toModel(): ContaAssociada {
         return ContaAssociada(
-            nome= this.nome,
-            instituicao= this.instituicao,
-            titular= this.titular,
-            documento= this.documento,
-            agencia= this.agencia,
-            numero= this.numero
+            nome = this.nome,
+            instituicao = this.instituicao,
+            titular = this.titular,
+            documento = this.documento,
+            agencia = this.agencia,
+            numero = this.numero
         )
 
     }

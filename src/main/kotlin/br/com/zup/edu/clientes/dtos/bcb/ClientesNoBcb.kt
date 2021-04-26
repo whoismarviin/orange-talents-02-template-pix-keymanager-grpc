@@ -18,7 +18,7 @@ interface ClientesNoBcb {
 
 
     @Get("/keys/{key}")
-    fun buscaChaveBcb(chave: String): HttpResponse<DetalhesPixResponse>
+    fun buscaChaveBcb(chave: String): HttpResponse<ProcuraChaveBcbResponse>
 
 
 
