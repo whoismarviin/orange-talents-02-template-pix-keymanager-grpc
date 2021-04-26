@@ -48,6 +48,7 @@ class ListaChavePixEndpoint(@Inject val chaveRepository: ChavePixRepository) :
 
 
         responseObserver.onNext(resposta)
+        responseObserver.onCompleted()
 
     }
 }
